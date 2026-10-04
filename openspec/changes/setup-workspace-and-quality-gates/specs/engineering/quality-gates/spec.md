@@ -13,6 +13,17 @@ Every pull request SHALL run the full pipeline, and merging into the main branch
 - **WHEN** a pull request fails any gate
 - **THEN** it cannot be merged until the failure is fixed
 
+#### Scenario: Direct push
+- **WHEN** anyone pushes or force-pushes directly to the main branch
+- **THEN** the push is rejected
+
+### Requirement: Short-lived branches
+A pull request's branch SHALL be deleted when the pull request is merged or closed.
+
+#### Scenario: Closed without merging
+- **WHEN** a pull request from a branch of this repository is closed without merging
+- **THEN** its branch is deleted
+
 ### Requirement: Zero lint findings
 Linting of code, templates and styles SHALL report zero errors and zero warnings. Inline directives that disable lint rules MUST NOT be accepted.
 

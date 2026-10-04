@@ -1,0 +1,39 @@
+{
+  "name": "safebits",
+  "version": "0.0.0",
+  "private": true,
+  "description": "safebits: weekly batch-cooking planner PWA for Spain",
+  "license": "UNLICENSED",
+  "packageManager": "npm@11.19.0",
+  "engines": {
+    "node": ">=24 <25 || >=26"
+  },
+  "workspaces": [
+    "packages/*",
+    "tools/*",
+    "safebits_*"
+  ],
+  "scripts": {
+    "build:shared": "npm run build -w @safebits/shared",
+    "typecheck": "npm run build:shared && npm run typecheck --workspaces --if-present",
+    "test": "npm run build:shared && npm run test --workspaces --if-present",
+    "build": "npm run build:shared && npm run build -w @safebits/back -w @safebits/front",
+    "build:lint": "npm run build -w @safebits/lint",
+    "lint": "npm run build:shared && npm run build:lint && eslint . --max-warnings 0 && biome lint --error-on-warnings && node tools/lint/dist/no-comments/cli.js && npm run lint:architecture",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:architecture": "depcruise safebits_front/src safebits_back/src packages/shared/src tools/lint/src --config .dependency-cruiser.json --output-type err",
+    "check:install-flags": "npm run build:lint && node tools/lint/dist/install-flags/cli.js"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@eslint/js": "^10.0.1",
+    "angular-eslint": "^22.5.0",
+    "dependency-cruiser": "^18.5.0",
+    "eslint": "^10.12.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.9.9",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.71.0"
+  }
+}

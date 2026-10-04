@@ -1,0 +1,11 @@
+node_modules
+dist
+coverage
+.angular
+openspec
+docs
+safebits-diseno
+.claude
+tools/lint/fixtures
+package-lock.json
+**/*.md

@@ -1,0 +1,11 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Intentional secret-scanning fixtures"
+paths = ['''tools/lint/fixtures/secrets/''']
+
+[[allowlists]]
+description = "SonarQube Cloud project key, a public identifier"
+regexTarget = "line"
+regexes = ['''^sonar\.projectKey=Isaacgc1999_safeBAItes_app$''']

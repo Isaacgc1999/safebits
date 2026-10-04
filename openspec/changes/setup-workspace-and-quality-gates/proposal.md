@@ -13,7 +13,7 @@ safebits is a greenfield project; the earlier Angular 21 scaffold was deleted. B
   - `safebits_edge` is added by `add-environments-and-edge-hosting`.
 - **Strict TypeScript** configuration shared by every workspace.
 - **Lint and format:**
-  - ESLint, stylelint and Prettier, with zero warnings allowed.
+  - ESLint, Biome (CSS) and Prettier, with zero warnings allowed.
   - Local rules: no comments anywhere, declarations only in `shared/<kind>/` folders, and the Angular conventions (standalone, OnPush, signals, lazy routes).
 - **Layer boundaries** enforced by dependency-cruiser.
 - **Generic building blocks** for the frontend: a typed entity store, list state, and repository ports.
@@ -37,6 +37,6 @@ None.
 
 ## Impact
 
-- **New folders:** `safebits_front/`, `safebits_back/` and `packages/shared/`, plus root tooling (`package.json` workspaces, `tsconfig.base.json`, ESLint, stylelint and Prettier configs, `tools/lint/`, `.github/workflows/`, `renovate.json`).
+- **New folders:** `safebits_front/`, `safebits_back/` and `packages/shared/`, plus root tooling (`package.json` workspaces, `tsconfig.base.json`, ESLint, Biome and Prettier configs, `tools/lint/`, `.github/workflows/`, `renovate.json`).
 - **Order:** change 1 of 17. Every later change depends on it.
 - **Services:** GitHub Actions, and SonarQube Cloud (free for public repositories).

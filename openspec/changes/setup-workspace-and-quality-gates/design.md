@@ -96,15 +96,16 @@ Vitest with v8 coverage runs in every workspace (Angular through its unit-test b
 ### 8. Quality gate, dependencies and secrets
 
 - **SonarQube Cloud** (free for public repositories): 0 bugs, 0 vulnerabilities, 0 code smells, 0 unreviewed security hotspots, duplication of 3% or less, and A ratings.
+  - It runs on pushes to `main` only, and only once the `SONAR_TOKEN` secret exists. Pull requests skip it.
 - **Dependencies:**
   - `npm audit` must report 0 vulnerabilities of any severity.
   - A script fails if `package.json` contains `overrides` or `resolutions`, or `.npmrc` enables `legacy-peer-deps` or `force`.
 - **Secrets:** gitleaks scans every push.
-- **Updates:** Renovate groups updates weekly.
+- **Updates:** no update bot. Dependencies are upgraded by hand, and `npm audit` in CI catches new advisories.
 
 ### 9. CI and branch protection
 
-- **Pipeline:** one GitHub Actions workflow on pull requests and on `main`: `npm ci` → lint → comment checks → dependency-cruiser → type-check → tests with coverage → build → audit and install-flag check → gitleaks → CodeQL → SonarQube.
+- **Pipeline:** one GitHub Actions workflow on pull requests and on `main`: `npm ci` → lint → comment checks → dependency-cruiser → type-check → tests with coverage → build → audit and install-flag check → gitleaks → CodeQL → SonarQube (on `main` only).
 - **Merging:** a repository ruleset on `main`, with no bypass, blocks direct pushes, force pushes and deletion, and requires a pull request and every check. No approval is required, because a solo maintainer cannot approve their own pull request.
 - **Branches:** the repository deletes a branch when its pull request is merged, and the `branch-cleanup` workflow deletes it when the pull request is closed without merging.
 - **Assumption:** the repository is public before CI is enabled, as it is a portfolio project. That makes branch protection and SonarQube Cloud free.

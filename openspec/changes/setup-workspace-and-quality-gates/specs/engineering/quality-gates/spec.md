@@ -75,11 +75,15 @@ Every workspace SHALL keep at least 90% coverage of lines, branches, functions a
 - **THEN** the pipeline fails
 
 ### Requirement: Code quality gate
-The code quality analysis SHALL report zero bugs, vulnerabilities and code smells, no unreviewed security hotspots, at most 3% duplication and the top rating in every category, on both new and overall code.
+The code quality analysis SHALL run on every push to the main branch once its access token is configured, and SHALL report zero bugs, vulnerabilities and code smells, no unreviewed security hotspots, at most 3% duplication and the top rating in every category, on both new and overall code. It MUST NOT run on pull requests.
 
 #### Scenario: New code smell
-- **WHEN** a pull request introduces a code smell
-- **THEN** the quality gate fails and the pull request cannot be merged
+- **WHEN** a push to the main branch introduces a code smell
+- **THEN** the quality gate fails that pipeline run
+
+#### Scenario: Pull request
+- **WHEN** the pipeline runs for a pull request
+- **THEN** the code quality analysis is skipped
 
 ### Requirement: Dependency vulnerabilities
 Dependency auditing SHALL report zero known vulnerabilities of any severity. Installation MUST NOT use force flags, legacy peer dependency resolution, overrides or resolutions.

@@ -14,7 +14,7 @@ Every standard below is checked automatically. A pull request cannot be merged w
 | Single responsibility | `max-lines-per-function` 40, `complexity` 8, `max-depth` 3, `max-params` 3, and the SonarQube cognitive complexity limit |
 | Security bans | No `innerHTML`/`outerHTML` writes or bindings and no `bypassSecurityTrust*` |
 | Coverage | At least 90% lines, branches, functions and statements in every workspace; the lint tools themselves are held to 100% |
-| Code quality | SonarQube Cloud quality gate: no bugs, vulnerabilities, code smells or unreviewed hotspots, at most 3% duplication |
+| Code quality | SonarQube Cloud quality gate: no bugs, vulnerabilities, code smells or unreviewed hotspots, at most 3% duplication. It runs on pushes to `main` once the `SONAR_TOKEN` secret is set, and never on pull requests |
 | Dependencies | `npm audit --audit-level=info` must report nothing; `check:install-flags` rejects `overrides`, `resolutions`, `legacy-peer-deps` and `force`. Vulnerabilities are fixed only by upgrading or replacing the dependency |
 | Secrets | gitleaks scans the full history on every push |
 | Formatting | Prettier (`format:check`) |

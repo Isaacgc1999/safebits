@@ -25,8 +25,8 @@
 
 - [ ] 4.1 Add the GitHub Actions workflow from design decision 9; verify a pull request runs every step and a deliberately failing step blocks the run
 - [x] 4.2 Add the install-flag check (no `overrides`/`resolutions`, no `legacy-peer-deps`/`force`) and gitleaks secret scanning; verify fixtures for both fail
-- [ ] 4.3 Connect SonarQube Cloud with the quality gate of design decision 8 and add it to the workflow; verify the gate passes on the skeleton and fails on a fixture with a code smell
-- [ ] 4.4 Enable CodeQL and Renovate (weekly, grouped); verify both run on the repository
+- [ ] 4.3 Add the SonarQube Cloud analysis with the quality gate of design decision 8 to the workflow, running on pushes to `main` only once the `SONAR_TOKEN` secret exists; verify a pull request skips it
+- [ ] 4.4 Enable CodeQL; verify it runs on the repository
 - [ ] 4.5 Protect `main` with a ruleset (no direct or force pushes, pull request required, every check required) and delete branches when their pull request is merged or closed; verify the rules apply to `main`, a pull request with a failing check cannot be merged, and a closed pull request's branch is deleted
 
 ## 5. Documentation

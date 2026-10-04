@@ -1,0 +1,63 @@
+{
+  "forbidden": [
+    {
+      "name": "no-circular",
+      "severity": "error",
+      "from": {},
+      "to": { "circular": true }
+    },
+    {
+      "name": "no-cross-feature-imports",
+      "severity": "error",
+      "from": { "path": "(^|/)safebits_front/src/app/features/([^/]+)/" },
+      "to": {
+        "path": "(^|/)safebits_front/src/app/features/([^/]+)/",
+        "pathNot": "(^|/)safebits_front/src/app/features/$2/"
+      }
+    },
+    {
+      "name": "no-shared-to-features",
+      "severity": "error",
+      "from": { "path": "(^|/)safebits_front/src/app/shared/" },
+      "to": { "path": "(^|/)safebits_front/src/app/(features|core)/" }
+    },
+    {
+      "name": "no-core-to-features",
+      "severity": "error",
+      "from": { "path": "(^|/)safebits_front/src/app/core/" },
+      "to": { "path": "(^|/)safebits_front/src/app/features/" }
+    },
+    {
+      "name": "no-cross-module-imports",
+      "severity": "error",
+      "from": { "path": "(^|/)safebits_back/src/modules/([^/]+)/" },
+      "to": {
+        "path": "(^|/)safebits_back/src/modules/([^/]+)/",
+        "pathNot": "(^|/)safebits_back/src/modules/$2/"
+      }
+    },
+    {
+      "name": "no-back-shared-to-modules",
+      "severity": "error",
+      "from": { "path": "(^|/)safebits_back/src/shared/" },
+      "to": { "path": "(^|/)safebits_back/src/modules/" }
+    },
+    {
+      "name": "no-shared-package-to-apps",
+      "severity": "error",
+      "from": { "path": "(^|/)packages/shared/" },
+      "to": { "path": "(^|/)(safebits_[a-z]+|tools)/" }
+    }
+  ],
+  "options": {
+    "doNotFollow": { "path": "node_modules" },
+    "exclude": { "path": "(^|/)(dist|coverage|\\.angular)/" },
+    "tsPreCompilationDeps": true,
+    "combinedDependencies": true,
+    "enhancedResolveOptions": {
+      "exportsFields": ["exports"],
+      "conditionNames": ["import", "require", "node", "default", "types"],
+      "mainFields": ["module", "main", "types", "typings"]
+    }
+  }
+}

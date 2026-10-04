@@ -1,0 +1,7 @@
+.card {
+  content: '/* not a comment */';
+}
+/* a comment */
+.tag {
+  color: red;
+}

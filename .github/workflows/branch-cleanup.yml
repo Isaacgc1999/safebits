@@ -1,0 +1,21 @@
+name: branch-cleanup
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  delete-unmerged:
+    name: Delete branch of closed pull request
+    if: github.event.pull_request.merged == false && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete the head branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: gh api --method DELETE "repos/$REPOSITORY/git/refs/heads/$HEAD_REF"

@@ -13,6 +13,17 @@ Every pull request SHALL run the full pipeline, and merging into the main branch
 - **WHEN** a pull request fails any gate
 - **THEN** it cannot be merged until the failure is fixed
 
+#### Scenario: Direct push
+- **WHEN** anyone pushes or force-pushes directly to the main branch
+- **THEN** the push is rejected
+
+### Requirement: Short-lived branches
+A pull request's branch SHALL be deleted when the pull request is merged or closed.
+
+#### Scenario: Closed without merging
+- **WHEN** a pull request from a branch of this repository is closed without merging
+- **THEN** its branch is deleted
+
 ### Requirement: Zero lint findings
 Linting of code, templates and styles SHALL report zero errors and zero warnings. Inline directives that disable lint rules MUST NOT be accepted.
 
@@ -64,11 +75,15 @@ Every workspace SHALL keep at least 90% coverage of lines, branches, functions a
 - **THEN** the pipeline fails
 
 ### Requirement: Code quality gate
-The code quality analysis SHALL report zero bugs, vulnerabilities and code smells, no unreviewed security hotspots, at most 3% duplication and the top rating in every category, on both new and overall code.
+The code quality analysis SHALL run on every push to the main branch once its access token is configured, and SHALL report zero bugs, vulnerabilities and code smells, no unreviewed security hotspots, at most 3% duplication and the top rating in every category, on both new and overall code. It MUST NOT run on pull requests.
 
 #### Scenario: New code smell
-- **WHEN** a pull request introduces a code smell
-- **THEN** the quality gate fails and the pull request cannot be merged
+- **WHEN** a push to the main branch introduces a code smell
+- **THEN** the quality gate fails that pipeline run
+
+#### Scenario: Pull request
+- **WHEN** the pipeline runs for a pull request
+- **THEN** the code quality analysis is skipped
 
 ### Requirement: Dependency vulnerabilities
 Dependency auditing SHALL report zero known vulnerabilities of any severity. Installation MUST NOT use force flags, legacy peer dependency resolution, overrides or resolutions.

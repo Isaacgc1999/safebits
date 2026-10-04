@@ -1,5 +1,35 @@
 schema: spec-driven
 
+context: |
+  Product: safebits (formerly safeBAItes), a Spain-first PWA for weekly batch-cooking plans, costed shopping lists and prep sessions. The UI is Spanish by default with full English. Artifacts are written in English.
+  Environments: production at https://safebits.isaacgarcia.stream, staging at https://staging.safebits.isaacgarcia.stream, demo at https://demo.safebits.isaacgarcia.stream (no backend).
+  Stack: Angular 22 (standalone, zoneless, signals) in safebits_front, Node 24 LTS with Fastify in safebits_back, a Cloudflare Worker edge in safebits_edge, shared code in packages/shared, Supabase (Postgres, Auth) in the EU, Upstash Redis in the EU, Resend in its EU region.
+  Running cost must stay at zero: free tiers only. There is no AI at runtime; AI is used only once, during development, to generate seed data.
+  The work is split into 17 ordered OpenSpec changes, from setup-workspace-and-quality-gates to add-demo-mode-and-launch. Each change depends on the ones before it.
+  Code location rules:
+  - Constants, enums, types, interfaces, models, schemas, mappers and utils live only in their shared/<kind>/ folder of each workspace, or in packages/shared when several workspaces use them. They are never declared inside components, services, handlers or repositories.
+  - Each function, class and file has a single responsibility.
+  Typing rules:
+  - Strict typing everywhere: no any and no unsafe casts.
+  - External data enters only through zod parsing into typed models.
+  Quality gates:
+  - No comments of any kind in code, templates, styles or SQL, and no eslint-disable directives.
+  - Zero lint warnings.
+  - At least 90% coverage (lines, branches, functions, statements) in every workspace.
+  - A clean SonarQube quality gate.
+  - npm audit with zero vulnerabilities, fixed only by upgrading or replacing dependencies, never with --force, --legacy-peer-deps, overrides or resolutions.
+  Security:
+  - No API keys, tokens or secrets in the browser or in browser storage; HttpOnly __Host- cookies only.
+  - Row-level security on every table.
+  - Fonts are self-hosted from npm packages and never loaded from URLs.
+  - Images are optimised (SVG icons, AVIF/WebP rasters).
+  Frontend: every component is standalone, OnPush and signal-based (signal inputs and outputs, signal stores, resource APIs). Feature routes are lazy-loaded by default. Reusable building blocks are generic and fully typed.
+  Performance: design for high concurrency with stateless servers, an index for every query, cursor pagination, virtualised long lists and heavy work in Web Workers.
+  Follow the official documentation of each technology (angular.dev, nodejs.org, Fastify, PostgreSQL, Supabase, Cloudflare) and OWASP ASVS L2 / WCAG 2.2 AA.
+  Visual identity: the approved design in safebits-diseno/ is the source of truth. It is a cozy pastel system (pills, rounded cards, buttons on a lip, Fraunces plus Atkinson Hyperlegible Next) with Claro, Oscuro and Como el sistema themes and a higher-contrast mode.
+  Accessibility: colours must stay distinguishable for people with colour-vision deficiencies, and meaning is never conveyed by colour alone.
+  Brand: the shield logo is redrawn in sage next to the "safebits" wordmark. Brand sources are in docs/brand, and design deviations are recorded in docs/design-decisions.md.
+
 # Project context (optional)
 # Add only constraints that should guide OpenSpec artifacts and workflows.
 # Include constraints an agent cannot infer by reading the code.

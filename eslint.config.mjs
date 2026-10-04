@@ -3,6 +3,7 @@ import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 import angular from 'angular-eslint';
 import prettier from 'eslint-config-prettier';
+import sonarjs from 'eslint-plugin-sonarjs';
 import { createLocalPlugin } from '@safebits/lint/eslint';
 
 const local = createLocalPlugin();
@@ -41,13 +42,18 @@ export default defineConfig(
   },
   {
     files: ['**/*.js', '**/*.mjs'],
-    extends: [eslint.configs.recommended],
+    extends: [eslint.configs.recommended, sonarjs.configs.recommended],
     plugins: { local },
     rules: { 'local/no-comments': 'error' },
   },
   {
     files: ['**/*.ts'],
-    extends: [eslint.configs.recommended, tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
+    extends: [
+      eslint.configs.recommended,
+      tseslint.configs.strictTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+      sonarjs.configs.recommended,
+    ],
     languageOptions: {
       parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
     },

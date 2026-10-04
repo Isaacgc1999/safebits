@@ -1,5 +1,3 @@
-import type { EntityId } from '@safebits/shared';
-
-export interface Identifiable<TId extends EntityId = EntityId> {
+export interface Identifiable<TId extends string = string> {
   readonly id: TId;
 }

@@ -1,8 +1,7 @@
 import { type Signal, computed, signal } from '@angular/core';
-import type { EntityId } from '@safebits/shared';
 import type { Identifiable } from '../interfaces/identifiable.interface';
 
-export class EntityStore<TEntity extends Identifiable<TId>, TId extends EntityId = EntityId> {
+export class EntityStore<TEntity extends Identifiable<TId>, TId extends string = string> {
   private readonly entities = signal<ReadonlyMap<TId, TEntity>>(new Map());
 
   public readonly all: Signal<readonly TEntity[]> = computed(() => [...this.entities().values()]);

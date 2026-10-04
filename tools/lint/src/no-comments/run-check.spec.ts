@@ -41,7 +41,8 @@ describe('listCheckedFiles', () => {
       'tools/lint/fixtures/bad.json': '{}',
       'app/src/styles.css': '',
     });
-    expect([...listCheckedFiles(root)].map((file) => file.replaceAll('\\', '/')).sort()).toEqual([
+    const checkedFiles = [...listCheckedFiles(root)].map((file) => file.replaceAll('\\', '/'));
+    expect(checkedFiles.toSorted((first, second) => first.localeCompare(second))).toEqual([
       'app/src/styles.css',
       'config.json',
     ]);

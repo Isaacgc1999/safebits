@@ -8,7 +8,7 @@ const fixtures = fileURLToPath(new URL('../../fixtures/depcruise', import.meta.u
 describe('layer rules', { timeout: 30_000 }, () => {
   it('reports every forbidden dependency in the violating fixture', async () => {
     const rules = new Set(await findLayerViolations(configPath, fixtures));
-    expect([...rules].sort()).toEqual([
+    expect([...rules].sort((first, second) => first.localeCompare(second))).toEqual([
       'no-back-shared-to-modules',
       'no-circular',
       'no-core-to-features',

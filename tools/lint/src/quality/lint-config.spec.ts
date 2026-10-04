@@ -26,6 +26,7 @@ const cases: readonly FixtureCase[] = [
   { file: 'bypass-security.ts', rule: 'no-restricted-syntax' },
   { file: 'comment.ts', rule: 'local/no-comments' },
   { file: 'inline-disable.ts', rule: 'local/no-comments' },
+  { file: 'sonar-identical-branches.ts', rule: 'sonarjs/no-all-duplicated-branches' },
   { file: 'src/features/week/week.ts', rule: 'local/declarations-in-shared' },
   { file: 'src/app.routes.ts', rule: 'local/lazy-feature-routes' },
   { file: 'angular/no-on-push.component.ts', rule: '@angular-eslint/prefer-on-push-component-change-detection' },

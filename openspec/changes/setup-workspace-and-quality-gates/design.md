@@ -97,6 +97,7 @@ Vitest with v8 coverage runs in every workspace (Angular through its unit-test b
 
 - **SonarQube Cloud** (free for public repositories): 0 bugs, 0 vulnerabilities, 0 code smells, 0 unreviewed security hotspots, duplication of 3% or less, and A ratings.
   - It runs on pushes to `main` only, and only once the `SONAR_TOKEN` secret exists. Pull requests skip it.
+  - The same "Sonar way" rules run locally and on every pull request through `eslint-plugin-sonarjs` (`recommended` config) in `npm run lint`. They match what SonarQube for IDE shows in VS Code, but cover every file, not only open ones.
 - **Dependencies:**
   - `npm audit` must report 0 vulnerabilities of any severity.
   - A script fails if `package.json` contains `overrides` or `resolutions`, or `.npmrc` enables `legacy-peer-deps` or `force`.

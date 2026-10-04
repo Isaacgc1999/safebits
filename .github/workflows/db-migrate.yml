@@ -5,7 +5,7 @@ on:
 
 jobs:
   migrate-staging:
-    environment: staging
+    environment: safebits-staging
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -14,7 +14,7 @@ jobs:
           supabase db push --db-url "postgresql://postgres.wpghxzsydnooyrvleohd:${{ secrets.SUPABASE_DB_PASSWORD }}@aws-0-eu-west-1.pooler.supabase.com:6543/postgres"
 
   migrate-production:
-    environment: production
+    environment: safebits-prod
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

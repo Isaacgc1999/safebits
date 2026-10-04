@@ -1,0 +1,16 @@
+jobs:
+  migrate-staging:
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+      - run: |
+          supabase db push --db-url "postgresql://postgres.wpghxzsydnooyrvleohd:${{ secrets.SUPABASE_DB_PASSWORD }}@aws-0-eu-west-1.pooler.supabase.com:6543/postgres"
+
+  migrate-production:
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: supabase/setup-cli@v1
+      - run: |
+          supabase db push --db-url "postgresql://postgres.fubfjoytzfjybiygfjgu:${{ secrets.SUPABASE_DB_PASSWORD }}@aws-1-eu-central-1.pooler.supabase.com:6543/postgres"
